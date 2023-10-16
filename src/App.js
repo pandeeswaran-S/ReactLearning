@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './style.css';
 import Header from './component/header/Header';
 import Form from './component/form/Form';
+import TicketList from './component/ticket/TicketList';
 import { data } from './DataModule/Data';
 import { generateTicketNumber, generateTicketId } from './Util/util';
 
@@ -36,19 +37,7 @@ export default function App() {
         />
       );
     } else if (page === 'TicketList') {
-      return (
-        <div>
-          {' '}
-          {tickets.map((ticket) => {
-            return (
-              <span>
-                {' '}
-                {ticket.ticketNumber} {ticket.subject} {ticket.status}{' '}
-              </span>
-            );
-          })}{' '}
-        </div>
-      );
+      return <TicketList tickets={tickets} updateTicket={updateTicket} onPageChange={onPageChange}></TicketList>
     }
   };
 
