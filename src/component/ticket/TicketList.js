@@ -7,7 +7,7 @@ const TicketList = (props) => {
 
   const deleteTicketAPI = (ticketId) => {
     let newTicketList = [];
-    tickets.array.forEach((ticket) => {
+    tickets.forEach((ticket) => {
       if(ticket.id != ticketId) {
         newTicketList[newTicketList.length] = ticket;
       }
