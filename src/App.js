@@ -9,10 +9,21 @@ import { generateTicketNumber, generateTicketId } from './Util/util';
 export default function App() {
   const [page, setPage] = useState('TicketForm');
   const [tickets, setTickets] = useState(data.tickets);
+  const [currentTicket, setCurrentTicket] = useState();
 
   const updateTicket = (ticketList) => {
     setTickets(ticketList);
   };
+
+  const getTicket = (ticketId) => {
+    let getTicket;
+    tickets.forEach((ticket) => {
+      if(ticket.id == ticketId) {
+        getTicket = ticket;
+      }
+    });
+    this.setState({currentTicket: getTicket, page:"TicketDetail"});
+  }
 
   const createTicket = (ticket) => {
     ticket.ticketNumber = generateTicketNumber(tickets);
@@ -33,11 +44,22 @@ export default function App() {
         <Form
           agents={data.agents}
           contacts={data.contacts}
+          updateTicket={updateTicket}
           createTicket={createTicket}
+          isAdd={true}
         />
       );
     } else if (page === 'TicketList') {
-      return <TicketList tickets={tickets} updateTicket={updateTicket} onPageChange={onPageChange}></TicketList>
+      return <TicketList tickets={tickets} updateTicket={updateTicket} onPageChange={onPageChange} getTicket={getTicket}></TicketList>
+    } else if (page === 'TicketDetail') {
+      return <Form
+      agents={data.agents}
+      contacts={data.contacts}
+      createTicket={createTicket}
+      updateTicket={updateTicket}
+      ticketsInfo={currentTicket}
+      isAdd={false}
+    />
     }
   };
 
