@@ -1,0 +1,25 @@
+{
+  "name": "stackblitz-starters-xbgw3b",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@material-ui/core": "^4.12.4",
+    "@mui/icons-material": "^5.14.12",
+    "@mui/material": "^5.0.0",
+    "@types/react": "^16.8.6 || ^17.0.0",
+    "material-ui/core": "*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-scripts": "latest"
+  }
+}
