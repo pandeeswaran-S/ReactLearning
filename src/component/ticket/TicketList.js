@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 
 
 const TicketList = (props) => {
-  let { tickets, updateTicket, onPageChange } = props;
+  let { tickets, updateTicket, getTicket } = props;
+
+  const updateTicketAPI = (ticketId) => {
+    getTicket(ticketId);
+  }
 
   const deleteTicketAPI = (ticketId) => {
     let newTicketList = [];
@@ -50,7 +54,7 @@ const TicketList = (props) => {
                             &#8942;
                           </button>
                           <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <div className="dropdown-item" onClick={()=>{deleteTicketAPI(ticket.id)}}>Edit</div>
+                            <div className="dropdown-item" onClick={()=>{updateTicketAPI(ticket.id)}}>Edit</div>
                             <div className="dropdown-item" onClick={()=>{deleteTicketAPI(ticket.id)}}>Delete</div>
                           </div>
                         </div></td>

@@ -2,18 +2,32 @@ import React, { useState } from 'react';
 import './Form.css';
 
 const Form = (props) => {
-  const { contacts, agents, createTicket, ticketsInfo } = props;
+  const { contacts, agents, createTicket, ticketsInfo, isAdd } = props;
 
-  const [subject, setSubject] = useState();
-  const [description, setDescription] = useState();
-  const [owner, setOwner] = useState();
-  const [contact, setContact] = useState();
-  const [statusVal, setStatusVal] = useState('open');
+  const [subject, setSubject] = useState(isAdd ? '' : ticketsInfo.subject);
+  const [description, setDescription] = useState(isAdd ? '' : ticketsInfo.description);
+  const [owner, setOwner] = useState(isAdd ? '' : ticketsInfo.ownerId);
+  const [contact, setContact] = useState(isAdd ? '' : ticketsInfo.contactId);
+  const [statusVal, setStatusVal] = useState(isAdd ? 'open' : ticketsInfo.status);
 
   const renderUserComponent = function (userList) {
     return userList.map((user) => {
       return <option value={user.id}>{user.name}</option>;
     });
+  };
+
+  const updateTicketAPI = (ticketId) => {
+
+    const ticket = {
+      subject: subject,
+      description: description,
+      owner: owner,
+      status: statusVal,
+      contact: contact,
+      id:ticketId
+    };
+    
+    createTicket(ticket);
   };
 
   const createTicketAPI = (event) => {
@@ -49,6 +63,26 @@ const Form = (props) => {
     console.log(event.target.value);
     setStatusVal(event.target.value);
   };
+
+  const getButton = (ticketId) => {
+    if(isAdd) {
+      return <button
+    type="submit"
+    className="btn btn-primary"
+    onClick={createTicketAPI}
+  >
+    Create Ticket
+  </button>;
+    }  else {
+      return <button
+    type="submit"
+    className="btn btn-primary"
+    onClick={()=>{updateTicketAPI(ticketId)}}
+  >
+    Update Ticket
+  </button>;
+    }
+  }
 
   return (
     <div className="container mt-5">
@@ -112,14 +146,10 @@ const Form = (props) => {
             <option value="closed">Closed</option>
           </select>
         </div>
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={createTicketAPI}
-        >
-          Create Ticket
-        </button>
-        <button type="submit" className="btn btn-danger cancleBtn">
+        {
+          
+        }
+        <button type="submit" className="btn btn-danger cancleBtn" onClick={()=>{onPageChange("TicketList")}}>
           Cancel
         </button>
       </form>

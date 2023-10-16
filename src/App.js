@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, setState } from 'react';
 import './style.css';
 import Header from './component/header/Header';
 import Form from './component/form/Form';
@@ -6,10 +6,11 @@ import TicketList from './component/ticket/TicketList';
 import { data } from './DataModule/Data';
 import { generateTicketNumber, generateTicketId } from './Util/util';
 
-export default function App() {
-  const [page, setPage] = useState('TicketForm');
+export default function App () {
+  const [page, setPage] = useState('TicketList');
   const [tickets, setTickets] = useState(data.tickets);
   const [currentTicket, setCurrentTicket] = useState();
+  const [state, setState] = useState();
 
   const updateTicket = (ticketList) => {
     setTickets(ticketList);
@@ -22,14 +23,15 @@ export default function App() {
         getTicket = ticket;
       }
     });
-    this.setState({currentTicket: getTicket, page:"TicketDetail"});
+    // setState({currentTicket: getTicket, page:"TicketDetail"});
+    setCurrentTicket(getTicket);
+    setPage('TicketDetail');
   }
 
   const createTicket = (ticket) => {
     ticket.ticketNumber = generateTicketNumber(tickets);
     ticket.id = generateTicketId(tickets);
     tickets[tickets.length] = ticket;
-    console.log(ticket, tickets);
     updateTicket(tickets);
     onPageChange('TicketList');
   };
@@ -47,6 +49,7 @@ export default function App() {
           updateTicket={updateTicket}
           createTicket={createTicket}
           isAdd={true}
+          onPageChange={onPageChange}
         />
       );
     } else if (page === 'TicketList') {
@@ -59,6 +62,7 @@ export default function App() {
       updateTicket={updateTicket}
       ticketsInfo={currentTicket}
       isAdd={false}
+      onPageChange={onPageChange}
     />
     }
   };
