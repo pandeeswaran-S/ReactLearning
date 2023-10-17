@@ -39,6 +39,11 @@ const TicketList = (props) => {
     return email;
   } 
 
+  const getStatus = (status) => {
+    let statusMap = {'open' : 'Open', 'in_progress': 'In Progress', 'closed': "Closed"};
+    return statusMap[status];
+  }
+
   return (
     <div>
       <div className="container mt-5">
@@ -67,7 +72,7 @@ const TicketList = (props) => {
                         <td>{ticket.description}</td>
                         <td>{getAgentEmail(ticket.ownerId)}</td>
                         <td>{getContactEmail(ticket.contactId)}</td>
-                        <td>{ticket.status}</td>
+                        <td>{getStatus(ticket.status)}</td>
                         <td><div className="dropdown">
                           <button className="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

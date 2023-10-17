@@ -14,7 +14,7 @@ export const data = {
       description: 'First ticket description',
       contactId: '123456',
       ownerId: '123456',
-      status: 'Open',
+      status: 'open',
     },
   ],
   agents: [

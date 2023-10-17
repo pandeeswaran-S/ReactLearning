@@ -3,7 +3,7 @@ export function generateTicketNumber(ticketList) {
     return ticket.ticketNumber;
   });
   ticketNumerList.sort();
-  return ticketNumerList[ticketNumerList.length - 1] + 1;
+  return parseInt(ticketNumerList[ticketNumerList.length - 1]) + 1;
 }
 
 export function generateTicketId(ticketList) {
@@ -11,5 +11,5 @@ export function generateTicketId(ticketList) {
     return ticket.id;
   });
   ticketIdList.sort();
-  return ticketIdList[ticketIdList.length - 1] + 1;
+  return parseInt(ticketIdList[ticketIdList.length - 1]) + 1;
 }
