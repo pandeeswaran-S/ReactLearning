@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 const TicketList = (props) => {
-  let { tickets, updateTicket, getTicket } = props;
+  let { contacts, agents, tickets, updateTicket, getTicket } = props;
 
   const updateTicketAPI = (ticketId) => {
     getTicket(ticketId);
@@ -18,6 +18,26 @@ const TicketList = (props) => {
     });
     updateTicket(newTicketList);
   };
+
+  const getAgentEmail = (userId) => {
+    let email = "Un Assigned";
+    agents.forEach((user) => {
+      if(user.id == userId) {
+        email = user.email;
+      }
+    });
+    return email;
+  } 
+
+  const getContactEmail = (contactId) => {
+    let email = "";
+    contacts.forEach((user) => {
+      if(user.id == contactId) {
+        email = user.email;
+      }
+    });
+    return email;
+  } 
 
   return (
     <div>
@@ -45,8 +65,8 @@ const TicketList = (props) => {
                         <th scope="row">{ticket.ticketNumber}</th>
                         <td>{ticket.subject}</td>
                         <td>{ticket.description}</td>
-                        <td>{ticket.ownerId}</td>
-                        <td>{ticket.contactId}</td>
+                        <td>{getAgentEmail(ticket.ownerId)}</td>
+                        <td>{getContactEmail(ticket.contactId)}</td>
                         <td>{ticket.status}</td>
                         <td><div className="dropdown">
                           <button className="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"

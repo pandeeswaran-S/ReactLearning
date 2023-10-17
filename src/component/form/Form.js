@@ -21,10 +21,11 @@ const Form = (props) => {
     const ticket = {
       subject: subject,
       description: description,
-      owner: owner,
+      ownerId: owner,
       status: statusVal,
-      contact: contact,
-      id:ticketId
+      contactId: contact,
+      id:ticketId,
+      ticketNumber:ticketsInfo.ticketNumber
     };
     console.log(ticket);
     updateTicketOperation(ticket);
@@ -35,9 +36,9 @@ const Form = (props) => {
     const ticket = {
       subject: subject,
       description: description,
-      owner: owner,
+      ownerId: owner,
       status: statusVal,
-      contact: contact,
+      contactId: contact,
     };
     console.log(ticket);
     createTicket(ticket);

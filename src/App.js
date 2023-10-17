@@ -26,6 +26,7 @@ export default function App () {
        }
     });
     updateTicket(newTicketList);
+    onPageChange('TicketList');
   };
 
   const getTicket = (ticketId) => {
@@ -66,7 +67,7 @@ export default function App () {
         />
       );
     } else if (page === 'TicketList') {
-      return <TicketList tickets={tickets} updateTicket={updateTicket} onPageChange={onPageChange} getTicket={getTicket}></TicketList>
+      return <TicketList tickets={tickets} updateTicket={updateTicket} onPageChange={onPageChange} getTicket={getTicket} contacts={data.contacts} agents={data.agents}></TicketList>
     } else if (page === 'TicketDetail') {
       return <Form
       agents={data.agents}
