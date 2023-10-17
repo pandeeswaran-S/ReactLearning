@@ -16,6 +16,18 @@ export default function App () {
     setTickets(ticketList);
   };
 
+  const updateTicketOperation = (updatedTicket) => {
+    let newTicketList = [];
+    tickets.forEach((ticket, idx) => {
+      if(ticket.id == updatedTicket.id) {
+        newTicketList[idx] = updatedTicket;
+       } else {
+        newTicketList[idx] = ticket;
+       }
+    });
+    updateTicket(newTicketList);
+  };
+
   const getTicket = (ticketId) => {
     let getTicket;
     tickets.forEach((ticket) => {
@@ -50,6 +62,7 @@ export default function App () {
           createTicket={createTicket}
           isAdd={true}
           onPageChange={onPageChange}
+          updateTicketOperation={updateTicketOperation}
         />
       );
     } else if (page === 'TicketList') {
@@ -63,6 +76,7 @@ export default function App () {
       ticketsInfo={currentTicket}
       isAdd={false}
       onPageChange={onPageChange}
+      updateTicketOperation={updateTicketOperation}
     />
     }
   };

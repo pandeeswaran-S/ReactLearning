@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Form.css';
 
 const Form = (props) => {
-  const { contacts, agents, createTicket, ticketsInfo, isAdd } = props;
+  const { contacts, agents, createTicket, ticketsInfo, isAdd, updateTicketOperation } = props;
 
   const [subject, setSubject] = useState(isAdd ? '' : ticketsInfo.subject);
   const [description, setDescription] = useState(isAdd ? '' : ticketsInfo.description);
@@ -16,8 +16,8 @@ const Form = (props) => {
     });
   };
 
-  const updateTicketAPI = (ticketId) => {
-
+  const updateTicketAPI = (ticketId, event) => {
+    event.preventDefault();
     const ticket = {
       subject: subject,
       description: description,
@@ -26,8 +26,8 @@ const Form = (props) => {
       contact: contact,
       id:ticketId
     };
-    
-    createTicket(ticket);
+    console.log(ticket);
+    updateTicketOperation(ticket);
   };
 
   const createTicketAPI = (event) => {
@@ -39,7 +39,7 @@ const Form = (props) => {
       status: statusVal,
       contact: contact,
     };
-    console.log(ticket, 'ticket');
+    console.log(ticket);
     createTicket(ticket);
   };
 
@@ -65,7 +65,7 @@ const Form = (props) => {
   };
 
   const getButton = (ticketId) => {
-    if(isAdd) {
+    if(!ticketId) {
       return <button
     type="submit"
     className="btn btn-primary"
@@ -77,7 +77,7 @@ const Form = (props) => {
       return <button
     type="submit"
     className="btn btn-primary"
-    onClick={()=>{updateTicketAPI(ticketId)}}
+    onClick={(event)=>{updateTicketAPI(ticketId, event)}}
   >
     Update Ticket
   </button>;
@@ -147,7 +147,7 @@ const Form = (props) => {
           </select>
         </div>
         {
-          
+          getButton(isAdd ? undefined : ticketsInfo.id)
         }
         <button type="submit" className="btn btn-danger cancleBtn" onClick={()=>{onPageChange("TicketList")}}>
           Cancel
